@@ -1,0 +1,9 @@
+tsconfig.json
+typedoc.json
+docs/
+src/
+tests/
+.eslintignore
+.eslintrc.yml
+.gitignore
+yarn.lock

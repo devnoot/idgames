@@ -1,7 +1,7 @@
 {
   "name": "idgames-archive-api",
   "description": "This is a wrapper around the idgames archive public API documented at https://www.doomworld.com/idgames/api/",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "keywords": ["api", "doom", "id", "idarchive", "doomworld"],
   "homepage": "https://github.com/doom2network/idgames-archive-api",
