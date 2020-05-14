@@ -19,7 +19,7 @@ npm install idgames-archive-api
 ### Importing the library
 
 ```
-import { IdGamesArchiveAPI } from 'idgames-public-api'
+import { IdGamesArchiveAPI } from 'idgames-archive-api'
 ```
 
 ### Methods
