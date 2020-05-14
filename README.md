@@ -1,7 +1,7 @@
 # idgames-archive-api
 This is a wrapper around the idgames archive public API documented at https://www.doomworld.com/idgames/api/
 
-Documentation for this package can be found at **placeholder** 
+Further documentation for this package can be found at https://doom2network.github.io/idgames-archive-api/ 
 
 ## Installation
 
