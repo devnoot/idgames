@@ -19,12 +19,12 @@ npm install idgames-archive-api
 ### Importing the library
 
 ```
-import { IdGamesPublicAPI } from 'idgames-public-api'
+import { IdGamesArchiveAPI } from 'idgames-public-api'
 ```
 
 ### Methods
 
-Each method in `IdGamesPublicAPI` will return a promise resolving in the requested data. The following methods are available.
+Each method in `IdGamesArchiveAPI` will return a promise resolving in the requested data. The following methods are available.
 
 - ping
 - dbPing
@@ -46,27 +46,27 @@ Each method in `IdGamesPublicAPI` will return a promise resolving in the request
 
 async function runner() {
 
-    const ping = await IdGamesPublicAPI.ping()
+    const ping = await IdGamesArchiveAPI.ping()
 
-    const dbping = await IdGamesPublicAPI.dbPing()
+    const dbping = await IdGamesArchiveAPI.dbPing()
 
-    const about = await IdGamesPublicAPI.about()
+    const about = await IdGamesArchiveAPI.about()
 
-    const get = await IdGamesPublicAPI.get({ id: '15156' })
+    const get = await IdGamesArchiveAPI.get({ id: '15156' })
 
-    const getParentDir = await IdGamesPublicAPI.getParentDir({ name: 'levels/doom/a-c/' })
+    const getParentDir = await IdGamesArchiveAPI.getParentDir({ name: 'levels/doom/a-c/' })
 
-    const getDirs = await IdGamesPublicAPI.getDirs({ name: 'levels/doom2/' })
+    const getDirs = await IdGamesArchiveAPI.getDirs({ name: 'levels/doom2/' })
 
-    const getFiles = await IdGamesPublicAPI.getFiles({ name: 'levels/doom/megawads/' })
+    const getFiles = await IdGamesArchiveAPI.getFiles({ name: 'levels/doom/megawads/' })
 
-    const getContents = await IdGamesPublicAPI.getContents({ name: 'levels/doom/' })
+    const getContents = await IdGamesArchiveAPI.getContents({ name: 'levels/doom/' })
 
-    const latestVotes = await IdGamesPublicAPI.latestVotes({ limit: 100 })
+    const latestVotes = await IdGamesArchiveAPI.latestVotes({ limit: 100 })
 
-    const latestFiles = await IdGamesPublicAPI.latestFiles({ limit: 10 })
+    const latestFiles = await IdGamesArchiveAPI.latestFiles({ limit: 10 })
 
-    const search = await IdGamesPublicAPI.search({ query: 'chest', type: 'filename', sort: 'date' })
+    const search = await IdGamesArchiveAPI.search({ query: 'chest', type: 'filename', sort: 'date' })
 
 }
 
@@ -78,10 +78,10 @@ runner()
 
 ```javascript
 function nonAsyncRunner() {
-    IdGamesPublicAPI.getContents({ name: 'levels/doom/' })
+    IdGamesArchiveAPI.getContents({ name: 'levels/doom/' })
         .then(data => {
             const firstTitle = data.content.file[0].title
-            IdGamesPublicAPI.search({ query: firstTitle })
+            IdGamesArchiveAPI.search({ query: firstTitle })
                 .then(console.log)
                 .catch(console.error)
             }

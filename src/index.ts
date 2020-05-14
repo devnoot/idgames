@@ -107,7 +107,7 @@ export interface APIVote {
   text: string
 }
 
-const IdGamesPublicAPI = {
+const IdGamesArchiveAPI = {
   about,
   dbPing,
   get,
@@ -121,4 +121,4 @@ const IdGamesPublicAPI = {
   search,
 }
 
-export {IdGamesPublicAPI}
+export {IdGamesArchiveAPI}
