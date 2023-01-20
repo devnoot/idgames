@@ -1,35 +1,35 @@
 {
   "name": "idgames-archive-api",
   "description": "This is a wrapper around the idgames archive public API documented at https://www.doomworld.com/idgames/api/",
-  "version": "1.0.2",
-  "main": "dist/index.js",
-  "keywords": ["api", "doom", "id", "idarchive", "doomworld"],
-  "homepage": "https://github.com/doom2network/idgames-archive-api",
+  "version": "2.0.0",
+  "main": "dist/bundle.min.js",
+  "keywords": [
+    "api",
+    "doom",
+    "id",
+    "idarchive",
+    "doomworld"
+  ],
+  "homepage": "https://github.com/devnoot/idgames-archive-api",
   "bugs": {
-    "url": "https://github.com/doom2network/idgames-archive-api/issues"
+    "url": "https://github.com/devnoot/idgames-archive-api/issues"
   },
-  "repository": "git@github.com:doom2network/idgames-archive-api.git",
+  "repository": "git@github.com:devnoot/idgames-archive-api.git",
   "author": "devnoot <devnoot@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "tsc": "tsc",
-    "lint": "eslint -c .eslintrc.yml --ext .ts src/",
+    "build": "tsc",
     "docs": "typedoc --excludeNotExported",
     "deploy": "gh-pages -d docs"
   },
   "dependencies": {
-    "node-fetch": "^2.6.0",
-    "query-string": "^6.12.1",
-    "typescript": "^3.9.2"
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
     "@types/node": "^14.0.1",
     "@types/node-fetch": "^2.5.7",
-    "@types/query-string": "^6.3.0",
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
-    "eslint": "^7.0.0",
-    "typedoc": "^0.17.6"
+    "gh-pages": "^2.2.0",
+    "typedoc": "^0.17.6",
+    "typescript": "^4.9.4"
   }
 }
