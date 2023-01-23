@@ -28,7 +28,7 @@ export interface APISearchSuccess extends APISuccess {
 export async function search(opts: SearchOpts): Promise<APIError|APIWarning|APISearchSuccess> {
 
     try {
-        const data = await useApi('search', opts)
+        const data = await useApi({ action: 'search', ...opts })
         return Promise.resolve(data)
     } catch (error) {
         return Promise.reject(error)

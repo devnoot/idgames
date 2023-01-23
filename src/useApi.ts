@@ -1,38 +1,59 @@
-import fetch from "node-fetch";
-import queryString from "node:querystring";
+import fetch from 'node-fetch'
+import { request } from 'undici'
 
 export type APIActionType =
-  | "ping"
-  | "dbping"
-  | "about"
-  | "get"
-  | "getparentdir"
-  | "getdirs"
-  | "getfiles"
-  | "getcontents"
-  | "latestvotes"
-  | "latestfiles"
-  | "search";
+    | 'ping'
+    | 'dbping'
+    | 'about'
+    | 'get'
+    | 'getparentdir'
+    | 'getdirs'
+    | 'getfiles'
+    | 'getcontents'
+    | 'latestvotes'
+    | 'latestfiles'
+    | 'search'
 
-export default async function useApi(
-  action: APIActionType,
-  opts: any = undefined
-): Promise<any> {
-  return new Promise((resolve, reject) => {
-    const apiBaseUrl = "https://www.doomworld.com/idgames/api/api.php";
-    const outputType = "json";
-
-    const qs = {
-      action,
-      out: outputType,
-      ...opts,
-    };
-
-    const url = `${apiBaseUrl}?${queryString.encode(qs)}`;
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => resolve(data))
-      .catch((error) => reject(error));
-  });
+type useApi = {
+    action: APIActionType
+    baseUrl?: string
+    outputType?: string
+    [key: string]: any
 }
+
+type useApiResult = {
+    action: APIActionType
+    data: any
+    statusCode: number
+    url: string
+}
+
+const useApi = async ({
+    action,
+    baseUrl = 'https://doomworld.com/idgames/api/api.php',
+    outputType = 'json',
+    ...rest
+}: useApi): Promise<useApiResult> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', action)
+    url.searchParams.set('out', outputType)
+
+    Object.entries(rest).forEach(([k, v]) => url.searchParams.set(k, `${v}`))
+
+    const { body, statusCode } = await request(url)
+
+    if (statusCode !== 200) {
+        throw new Error(`Request failed with status code ${statusCode}`)
+    }
+
+    const data = await body.json()
+
+    return {
+        action,
+        data,
+        statusCode,
+        url: url.toString(),
+    }
+}
+
+export default useApi
