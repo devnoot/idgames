@@ -1,1 +1,0 @@
-This folder contains the various API actions offered https://www.doomworld.com/idgames/api/

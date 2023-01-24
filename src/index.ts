@@ -1,124 +1,172 @@
-/**
- * @description This package provides a wrapper around the idGames Archive Public
- * API documented at https://www.doomworld.com/idgames/api/
- * @author devnoot <devnoot@gmail.com>
- * @license MIT
- */
+import { request } from 'undici'
+import {
+    Commands,
+    DbPingResponse,
+    GetContentsResponse,
+    GetDirsResponse,
+    GetFilesResponse,
+    GetParentDirResponse,
+    GetResponse,
+    LatestFilesResponse,
+    LatestVotesResponse,
+    PingResponse,
+    SearchResponse,
+} from './types'
 
-import { ping } from './commands/ping'
-import { dbPing } from './commands/dbping'
-import { about } from './commands/about'
-import { get } from './commands/get'
-import { getParentDir } from './commands/getParentDir'
-import { getDirs } from './commands/getDirs'
-import { getFiles } from './commands/getFiles'
-import { getContents } from './commands/getContents'
-import { latestVotes } from './commands/latestVotes'
-import { latestFiles } from './commands/latestFiles'
-import { search } from './commands/search'
+const defaultBaseUrl = new URL('https://doomworld.com/idgames/api/api.php')
+const defaultOutputType = 'json'
 
-interface APIResponse {
-  /** Meta info about the response. */
-  meta: {
-    /** The version of the response */
-    version: number | string
-  }
+export const ping = async ({ 
+    baseUrl = defaultBaseUrl, 
+    outputType = defaultOutputType 
+} = {}): Promise<PingResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.ping)
+    url.searchParams.set('out', outputType)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIError extends APIResponse {
-  /** The type of error */
-  type: string
-  /** An error message */
-  message: string
+export const dbPing = async ({ 
+    baseUrl = defaultBaseUrl, 
+    outputType = defaultOutputType 
+} = {}): Promise<DbPingResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.dbping)
+    url.searchParams.set('out', outputType)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIWarning extends APIResponse {
-  /** The type of warning */
-  type: string
-  /** An error message */
-  message: string
+export const about = async ({ 
+    baseUrl = defaultBaseUrl, 
+    outputType = defaultOutputType 
+} = {}): Promise<DbPingResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.about)
+    url.searchParams.set('out', outputType)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APISuccess extends APIResponse {
-  /** The requested data */
-  content: object
+export const get = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    id = undefined,
+    file = undefined,
+}): Promise<GetResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.get)
+    url.searchParams.set('out', outputType)
+    if (id) url.searchParams.set('id', id)
+    if (file) url.searchParams.set('file', file)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIFileBase {
-  /** The file's id. */
-  id: string
-  /** The title of the file. */
-  title: string
-  /** The file's author/uploader. */
-  author: string
-  /** The file's description. */
-  description: string
-  /** The file's average rating, as rated by users. */
-  rating: string 
+export const getParentDir = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    id = undefined,
+    name = undefined,
+}): Promise<GetParentDirResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.get)
+    url.searchParams.set('out', outputType)
+    if (id) url.searchParams.set('id', id)
+    if (name) url.searchParams.set('name', name)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIFile extends APIFileBase {
-  /** The file's full directory path. */
-  dir: string
-  /** The filename itself, no path. */
-  filename: string
-  /** The size of the file in bytes. */
-  size: string
-  /** The date that the file was added in seconds since the Unix Epoch (Jan. 1, 1970). Note: This is likely influenced by the time zone of the primary idGames Archive. */
-  age: string
-  /** A YYYY-MM-DD formatted date describing the date that this file was added to the archive. */
-  date: string
-  /** The author's E-mail address. */
-  email: string
-  /** The number of votes that this file received. */
-  votes: string
-  /** The URL for the idGames Archive page for this file. */
-  url: string
-  /** The idgames protocol URL for this file. */
-  idgamesurl: string
+export const getDirs = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    id = undefined,
+    name = undefined,
+}): Promise<GetDirsResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.get)
+    url.searchParams.set('out', outputType)
+    if (id) url.searchParams.set('id', id)
+    if (name) url.searchParams.set('name', name)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIDir {
-  /** The directory id. */
-  id: string
-  /** The directory name (in full). Takes precedence over id. */
-  name: string
+export const getFiles = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    id = undefined,
+    name = undefined,
+}): Promise<GetFilesResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.get)
+    url.searchParams.set('out', outputType)
+    if (id) url.searchParams.set('id', id)
+    if (name) url.searchParams.set('name', name)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIReview {
-  /** The individual review's text, if any. Note: may be blank. */
-  text: string
-  /** The vote associated with the review. */
-  vote: string
-  /** The user name associated with the review, if any. Note: may be blank/null, which means "Anonymous". Since Version 3 */
-  username: string
+export const getContents = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    id = undefined,
+    name = undefined,
+}): Promise<GetContentsResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.get)
+    url.searchParams.set('out', outputType)
+    if (id) url.searchParams.set('id', id)
+    if (name) url.searchParams.set('name', name)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export interface APIVote {
-  /** Id of the vote. */
-  id: string
-  /** Id of the file voted on. */
-  file: string
-  /** The title of the file voted on. */
-  title: string
-  /** The file's average vote. */
-  rating: string
-  /** The text of the review, if any. */
-  text: string
+export const latestVotes = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    limit = undefined,
+}): Promise<LatestVotesResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.latestvotes)
+    url.searchParams.set('out', outputType)
+    if (limit) url.searchParams.set('limit', limit)
+    const { body } = await request(url)
+    return await body.json()
 }
 
-const IdGamesArchiveAPI = {
-  about,
-  dbPing,
-  get,
-  getContents,
-  getDirs,
-  getFiles,
-  getParentDir,
-  latestFiles,
-  latestVotes,
-  ping,
-  search,
+export const latestFiles = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    limit = undefined,
+    startid = 0,
+}): Promise<LatestFilesResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.latestfiles)
+    url.searchParams.set('out', outputType)
+    if (limit) url.searchParams.set('limit', limit)
+    if (startid) url.searchParams.set('startid', String(startid))
+    const { body } = await request(url)
+    return await body.json()
 }
 
-export {IdGamesArchiveAPI}
+export const search = async ({
+    baseUrl = defaultBaseUrl,
+    outputType = defaultOutputType,
+    query = undefined,
+    type = undefined,
+    sort = undefined,
+    dir = undefined,
+}): Promise<SearchResponse> => {
+    const url = new URL(baseUrl)
+    url.searchParams.set('action', Commands.search)
+    url.searchParams.set('out', outputType)
+    if (query) url.searchParams.set('query', query)
+    if (type) url.searchParams.set('type', type)
+    if (sort) url.searchParams.set('sort', sort)
+    if (dir) url.searchParams.set('dir', dir)
+    const { body } = await request(url)
+    return await body.json()
+}
