@@ -9,7 +9,7 @@ npm install idgames
 ```
 
 ```typescript
-import { ping, dbPing, about, get } from 'idgames'
+import { ping, dbPing, about, get, getParentDir, getDirs, getContents, latestVotes, latestFiles, search } from 'idgames'
 
 ;(async () => {
     const ping = await ping()
@@ -19,6 +19,20 @@ import { ping, dbPing, about, get } from 'idgames'
     const about = await about()
 
     const get = await get({ id: '15156' })
+
+    const getparentdir = await getParentDir({ id: '666' })
+
+    const getdirs = await getDirs({ name: 'zvox' })
+
+    const getfiles = await getFiles({ id: '10666' })
+
+    const getcontents = await getContents({ id: '666' })
+
+    const latestvotes = await latestVotes({ limit: 25 })
+
+    const latestfiles = await latestFiles({ limit: 10 })
+
+    const search = await search({ query: 'UDM2' })
 })()
 ```
 
@@ -38,12 +52,6 @@ Each function in this package will return a promise resolving in the requested d
 -   latestVotes
 -   latestFiles
 -   search
-
-If there are parameters required (the official API docs will show this), you can pass them into the function like so
-
-```typescript
-const latestFiles = await latestFiles({ limit: 5, startid: 100 })
-```
 
 ## Contributions
 
