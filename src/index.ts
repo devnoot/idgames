@@ -11,7 +11,7 @@ import {
     LatestVotesResponse,
     PingResponse,
     SearchResponse,
-} from './API.types'
+} from './types'
 
 const defaultBaseUrl = new URL('https://doomworld.com/idgames/api/api.php')
 const defaultOutputType = 'json'

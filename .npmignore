@@ -1,9 +1,8 @@
-tsconfig.json
-typedoc.json
-docs/
 src/
 tests/
 .eslintignore
 .eslintrc.yml
 .gitignore
+.prettierrc.yaml
+tsconfig.json
 yarn.lock

@@ -1,69 +1,49 @@
-# idgames-archive-api
+# idgames
 
 This is a wrapper around the idgames archive public API documented at https://www.doomworld.com/idgames/api/
-
-Further documentation for this package can be found at https://doom2network.github.io/idgames-archive-api/
 
 ## Quick Start
 
 ```bash
-npm install idgames-archive-api
+npm install idgames
 ```
 
 ```typescript
-import { IdGamesArchiveAPI } from "idgames-archive-api";
+import { ping, dbPing, about, get } from 'idgames'
 
-(async () => {
-  const ping = await IdGamesArchiveAPI.ping();
+;(async () => {
+    const ping = await ping()
 
-  const dbping = await IdGamesArchiveAPI.dbPing();
+    const dbping = await dbPing()
 
-  const about = await IdGamesArchiveAPI.about();
+    const about = await about()
 
-  const get = await IdGamesArchiveAPI.get({ id: "15156" });
-
-  const getParentDir = await IdGamesArchiveAPI.getParentDir({
-    name: "levels/doom/a-c/",
-  });
-
-  const getDirs = await IdGamesArchiveAPI.getDirs({ name: "levels/doom2/" });
-
-  const getFiles = await IdGamesArchiveAPI.getFiles({
-    name: "levels/doom/megawads/",
-  });
-
-  const getContents = await IdGamesArchiveAPI.getContents({
-    name: "levels/doom/",
-  });
-
-  const latestVotes = await IdGamesArchiveAPI.latestVotes({ limit: 100 });
-
-  const latestFiles = await IdGamesArchiveAPI.latestFiles({ limit: 10 });
-
-  const search = await IdGamesArchiveAPI.search({
-    query: "chest",
-    type: "filename",
-    sort: "date",
-  });
-})();
+    const get = await get({ id: '15156' })
+})()
 ```
 
 ## Usage
 
 ### Methods
 
-Each method in `IdGamesArchiveAPI` will return a promise resolving in the requested data. The following methods are available.
+Each function in this package will return a promise resolving in the requested data. The following functions are available.
 
-- ping
-- dbPing
-- about
-- get
-- getParentDir
-- getDirs
-- getContents
-- latestVotes
-- latestFiles
-- search
+-   ping
+-   dbPing
+-   about
+-   get
+-   getParentDir
+-   getDirs
+-   getContents
+-   latestVotes
+-   latestFiles
+-   search
+
+If there are parameters required (the official API docs will show this), you can pass them into the function like so
+
+```typescript
+const latestFiles = await latestFiles({ limit: 5, startid: 100 })
+```
 
 ## Contributions
 

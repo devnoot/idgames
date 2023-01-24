@@ -1,5 +1,5 @@
 const assert = require('assert')
-const { ping, dbPing, about, get, latestFiles } = require('../dist/API')
+const { ping, dbPing, about, get, latestFiles } = require('../dist/index')
 
 describe('API Tests', () => {
     it('ping', async () => {
