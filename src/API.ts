@@ -16,7 +16,10 @@ import {
 const defaultBaseUrl = new URL('https://doomworld.com/idgames/api/api.php')
 const defaultOutputType = 'json'
 
-export const ping = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutputType } = {}): Promise<PingResponse> => {
+export const ping = async ({ 
+    baseUrl = defaultBaseUrl, 
+    outputType = defaultOutputType 
+} = {}): Promise<PingResponse> => {
     const url = new URL(baseUrl)
     url.searchParams.set('action', Commands.ping)
     url.searchParams.set('out', outputType)
@@ -24,7 +27,10 @@ export const ping = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutpu
     return await body.json()
 }
 
-export const dbPing = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutputType } = {}): Promise<DbPingResponse> => {
+export const dbPing = async ({ 
+    baseUrl = defaultBaseUrl, 
+    outputType = defaultOutputType 
+} = {}): Promise<DbPingResponse> => {
     const url = new URL(baseUrl)
     url.searchParams.set('action', Commands.dbping)
     url.searchParams.set('out', outputType)
@@ -32,7 +38,10 @@ export const dbPing = async ({ baseUrl = defaultBaseUrl, outputType = defaultOut
     return await body.json()
 }
 
-export const about = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutputType } = {}): Promise<DbPingResponse> => {
+export const about = async ({ 
+    baseUrl = defaultBaseUrl, 
+    outputType = defaultOutputType 
+} = {}): Promise<DbPingResponse> => {
     const url = new URL(baseUrl)
     url.searchParams.set('action', Commands.about)
     url.searchParams.set('out', outputType)
