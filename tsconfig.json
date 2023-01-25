@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "CommonJS",
-    "moduleResolution": "node",
-    // "lib": [],
-    "outDir": "./dist",
+    "module": "commonjs",
+    "target": "ES2015",
     "strict": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "lib": ["dom", "ES2015"],
     "esModuleInterop": true,
-    "types": ["node"]
+    "outDir": "dist"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "tests/**/*"]

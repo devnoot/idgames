@@ -1,4 +1,5 @@
-import { request } from 'undici'
+import axios from 'axios'
+
 import {
     Commands,
     DbPingResponse,
@@ -16,37 +17,28 @@ import {
 const defaultBaseUrl = new URL('https://doomworld.com/idgames/api/api.php')
 const defaultOutputType = 'json'
 
-export const ping = async ({ 
-    baseUrl = defaultBaseUrl, 
-    outputType = defaultOutputType 
-} = {}): Promise<PingResponse> => {
+export const ping = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutputType } = {}): Promise<PingResponse> => {
     const url = new URL(baseUrl)
     url.searchParams.set('action', Commands.ping)
     url.searchParams.set('out', outputType)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
-export const dbPing = async ({ 
-    baseUrl = defaultBaseUrl, 
-    outputType = defaultOutputType 
-} = {}): Promise<DbPingResponse> => {
+export const dbPing = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutputType } = {}): Promise<DbPingResponse> => {
     const url = new URL(baseUrl)
     url.searchParams.set('action', Commands.dbping)
     url.searchParams.set('out', outputType)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
-export const about = async ({ 
-    baseUrl = defaultBaseUrl, 
-    outputType = defaultOutputType 
-} = {}): Promise<DbPingResponse> => {
+export const about = async ({ baseUrl = defaultBaseUrl, outputType = defaultOutputType } = {}): Promise<DbPingResponse> => {
     const url = new URL(baseUrl)
     url.searchParams.set('action', Commands.about)
     url.searchParams.set('out', outputType)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const get = async ({
@@ -60,8 +52,8 @@ export const get = async ({
     url.searchParams.set('out', outputType)
     if (id) url.searchParams.set('id', id)
     if (file) url.searchParams.set('file', file)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const getParentDir = async ({
@@ -75,8 +67,8 @@ export const getParentDir = async ({
     url.searchParams.set('out', outputType)
     if (id) url.searchParams.set('id', id)
     if (name) url.searchParams.set('name', name)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const getDirs = async ({
@@ -90,8 +82,8 @@ export const getDirs = async ({
     url.searchParams.set('out', outputType)
     if (id) url.searchParams.set('id', id)
     if (name) url.searchParams.set('name', name)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const getFiles = async ({
@@ -105,8 +97,8 @@ export const getFiles = async ({
     url.searchParams.set('out', outputType)
     if (id) url.searchParams.set('id', id)
     if (name) url.searchParams.set('name', name)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const getContents = async ({
@@ -120,8 +112,8 @@ export const getContents = async ({
     url.searchParams.set('out', outputType)
     if (id) url.searchParams.set('id', id)
     if (name) url.searchParams.set('name', name)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const latestVotes = async ({
@@ -133,8 +125,8 @@ export const latestVotes = async ({
     url.searchParams.set('action', Commands.latestvotes)
     url.searchParams.set('out', outputType)
     if (limit) url.searchParams.set('limit', limit)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const latestFiles = async ({
@@ -148,8 +140,8 @@ export const latestFiles = async ({
     url.searchParams.set('out', outputType)
     if (limit) url.searchParams.set('limit', limit)
     if (startid) url.searchParams.set('startid', String(startid))
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
 
 export const search = async ({
@@ -167,6 +159,6 @@ export const search = async ({
     if (type) url.searchParams.set('type', type)
     if (sort) url.searchParams.set('sort', sort)
     if (dir) url.searchParams.set('dir', dir)
-    const { body } = await request(url)
-    return await body.json()
+    const res = await axios.get(url.toString())
+    return await res.data
 }
