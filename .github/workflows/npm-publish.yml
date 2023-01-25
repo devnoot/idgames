@@ -13,6 +13,8 @@ jobs:
         with:
           node-version: 16
       - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 2.2.4  
       - run: pnpm i
       - run: pnpm build
       - run: pnpm test
