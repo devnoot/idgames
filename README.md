@@ -2,6 +2,8 @@
 
 This is a wrapper around the idgames archive public API documented at https://www.doomworld.com/idgames/api/
 
+[![publish 2 npm](https://github.com/devnoot/idgames/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/devnoot/idgames/actions/workflows/npm-publish.yml)
+
 ## Quick Start
 
 ```bash
