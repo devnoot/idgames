@@ -1,6 +1,7 @@
 name: publish 2 npm
 
 on:
+  workflow_dispatch:
   release:
     types: [created]
 
