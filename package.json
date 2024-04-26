@@ -1,7 +1,7 @@
 {
   "name": "idgames",
   "description": "This is a nodejs wrapper around the idgames API documented at https://www.doomworld.com/idgames/api/",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/index.js",
   "keywords": [
     "doom",
